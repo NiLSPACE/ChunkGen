@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<script src="?endpoint=file&file=angular"></script>
+	<script src="?endpoint=file&file=appjs"></script>
+	<link rel="stylesheet" type="text/css" href="?endpoint=file&file=appcss">
+</head>
+<body class="main-content">
+
+<div ng-app="mainApp">
+	<div ng-controller="controller">
+		<div ng-show="!activeConnection" class="warning">
+			The connection to Cuberite was lost.
+		</div>
+		<div>
+			<div class="world-selection">
+				<div>
+					<h3>Active World:</h3>
+					<select ng-model="selectedWorld" ng-options="ind as world.name for (ind, world) in worlds"></select>
+				</div>
+				<div ng-if="selectedWorld">
+					<h4>Stats</h4>
+					<div class="stat-grid">
+						<div>Generator Queue</div>
+						<div>{{worlds[selectedWorld].stats.generator_queue}}</div>
+						<div>Lighting Queue</div>
+						<div>{{worlds[selectedWorld].stats.lighting_queue}}</div>
+						<div>Storage Queue (save/load)</div>
+						<div>{{worlds[selectedWorld].stats.storage_save_queue}} / {{worlds[selectedWorld].stats.storage_load_queue}}</div>
+					</div>
+				</div>
+			</div>
+			
+			<div ng-if="worlds[selectedWorld].tasks">
+				<h3>Active Tasks</h3>
+				<div class="progress-bar" ng-repeat="task in worlds[selectedWorld].tasks track by task.id" ng-class="task.status == 'canceled' ? 'bar-canceled' : ''" >
+					<div class="progress-bar-bar" style="width: {{task.progress / task.totalChunks * 100}}%"></div>
+					<div class="flex-center">
+						<button class="progress-bar-cancel" ng-click="cancelTask(task)">Cancel</button>
+						<div class="progress-bar-text">{{task.progress}} / {{task.totalChunks}}</div>
+					</div>
+				</div>
+			</div>
+			<h3>Options</h3>
+			<table>
+				<tr>
+					<td>Generate Mode</td>
+					<td>
+						<select ng-model="mode">
+							<option selected>Regenerate</option>
+							<option>Generate</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Chunk Order</td>
+					<td>
+						<select ng-model="chunkOrder">
+							<option selected>Spiral</option>
+							<option>Lines</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			
+			<div ng-disabled="selectedWorld == null || !activeConnection">
+				<h3>Fixed chunk</h3>
+				<table>
+					<tr>
+						<td>Chunk X</td>
+						<td><input type="number" ng-model="fixedChunk.chunkX"></td>
+					</tr>
+					<tr>
+						<td>Chunk Z</td>
+						<td><input type="number" ng-model="fixedChunk.chunkZ"></td>
+					</tr>
+					<tr>
+						<td>Radius</td>
+						<td><input type="number" ng-model="fixedChunk.radius"></td>
+					</tr>
+				</table>
+				<button ng-click="doFixedChunk()">{{mode}}</button>
+				
+				<h3>Players</h3>
+				Radius: <input type="number" ng-model="playerRadius">
+				
+				<table>
+					<tr ng-repeat="player in worlds[selectedWorld].players">
+						<td>{{player}}</td>
+						<td><button ng-click="doAroundPlayer(player)">Radius</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

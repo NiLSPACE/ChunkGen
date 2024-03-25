@@ -1,0 +1,74 @@
+:root {
+	--padding: 10px;
+}
+
+div[disabled="disabled"] {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.world-selection {
+	display:flex;
+	justify-content: flex-start;
+    gap: 40px;
+}
+
+.stat-grid {
+	display:grid;
+	grid-auto-columns: 2;
+}
+
+.stat-grid > div:nth-child(2n) {
+	grid-column: 2;
+}
+
+.warning {
+	font-weight: bold;
+	color: red;
+}
+
+.main-content {
+	padding: 0px;
+	padding-left: var(--padding) !important;
+	width: calc(100vw - var(--padding)) !important;
+	margin: 0px !important;
+}
+
+
+.progress-bar:hover .progress-bar-cancel {
+	display:initial;
+}
+.progress-bar:not(:hover) .progress-bar-cancel {
+	display:none;
+}
+.progress-bar:hover .progress-bar-text {
+	display:none;
+}
+.progress-bar:not(:hover) .progress-bar-text {
+	display:initial;
+}
+.progress-bar
+{
+	width: calc(100% - var(--padding));
+	border: 1px solid lightgray;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	display:grid;
+	min-height:30px;
+}
+.progress-bar > div {
+	grid-row: 1;
+	grid-column: 1;
+}
+.progress-bar-bar {
+	background-color: lightgreen
+}
+
+.bar-canceled {
+	background-color: orange;
+}
+
+.flex-center {
+	display:flex;
+	justify-content: center;
+}
