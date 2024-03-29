@@ -19,6 +19,7 @@ div[disabled="disabled"] {
 }
 
 .stat-grid > div:nth-child(2n) {
+	padding-left: 8px;
 	grid-column: 2;
 }
 
