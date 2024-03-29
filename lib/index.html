@@ -18,7 +18,7 @@
 			<div class="world-selection">
 				<div>
 					<h3>Active World:</h3>
-					<select ng-model="selectedWorld" ng-options="ind as world.name for (ind, world) in worlds"></select>
+					<select ng-model="selectedWorld" ng-options="ind as formatWorldName(world) for (ind, world) in worlds"></select>
 				</div>
 				<div ng-if="selectedWorld">
 					<h4>Stats</h4>
