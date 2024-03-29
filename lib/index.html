@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<script src="?endpoint=file&file=angular"></script>
+	<script src="?endpoint=constants"></script>
 	<script src="?endpoint=file&file=appjs"></script>
 	<link rel="stylesheet" type="text/css" href="?endpoint=file&file=appcss">
 </head>
@@ -47,18 +48,14 @@
 				<tr>
 					<td>Generate Mode</td>
 					<td>
-						<select ng-model="mode">
-							<option selected>Regenerate</option>
-							<option>Generate</option>
+						<select ng-model="generateMode" ng-options="mode as mode for mode in generateModeOptions">
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>Chunk Order</td>
 					<td>
-						<select ng-model="chunkOrder">
-							<option selected>Spiral</option>
-							<option>Lines</option>
+						<select ng-model="chunkOrder" ng-options="mode as mode for mode in chunkOrderOptions">
 						</select>
 					</td>
 				</tr>
@@ -80,7 +77,7 @@
 						<td><input type="number" ng-model="fixedChunk.radius"></td>
 					</tr>
 				</table>
-				<button ng-click="doFixedChunk()">{{mode}}</button>
+				<button ng-click="doFixedChunk()">{{generateMode}}</button>
 				
 				<h3>Players</h3>
 				Radius: <input type="number" ng-model="playerRadius">

@@ -121,12 +121,12 @@ function CreateTask(a_World, a_Mode, a_ChunkX, a_ChunkZ, a_Radius, a_ChunkOrder)
 	}
 	
 	local coordinateProvider;
-	if (a_ChunkOrder == "Lines") then
+	if (a_ChunkOrder == ChunkOrder.Lines) then
 		coordinateProvider = CoordinateProviderArea(
 			a_ChunkX - a_Radius, a_ChunkX + a_Radius,
 			a_ChunkZ - a_Radius, a_ChunkZ + a_Radius
 		);
-	elseif (a_ChunkOrder == "Spiral") then
+	elseif (a_ChunkOrder == ChunkOrder.Spiral) then
 		coordinateProvider = CoordinateProviderSpiral(a_ChunkX, a_ChunkZ, a_Radius)
 	else
 		return "Unknown chunk order"
@@ -137,9 +137,9 @@ function CreateTask(a_World, a_Mode, a_ChunkX, a_ChunkZ, a_Radius, a_ChunkOrder)
 			local world = cRoot:Get():GetWorld(a_World);
 			for x, z in coordinateProvider do
 				task.progress = task.progress + 1
-				if (a_Mode == "Regenerate") then
+				if (a_Mode == GenerateMode.Regenerate) then
 					world:RegenerateChunk(x, z);
-				elseif (a_Mode == "Generate") then
+				elseif (a_Mode == GenerateMode.Generate) then
 					world:GenerateChunk(x, z);
 				end
 				
@@ -171,7 +171,7 @@ end
 
 --- Creates a new chunk generating task at fixed coordinates.
 function CreateTaskFixed(a_Task)
-	return CreateTask(a_Task.world, a_Task.mode, a_Task.chunkX, a_Task.chunkZ, a_Task.radius, a_Task.chunkOrder);
+	return CreateTask(a_Task.world, a_Task.generateMode, a_Task.chunkX, a_Task.chunkZ, a_Task.radius, a_Task.chunkOrder);
 end
 
 

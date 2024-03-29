@@ -129,8 +129,22 @@ end
 
 
 
+--- Creates valid Javascript code which will contain all the constants.
+function HandleEndpointConstants(a_Request)
+	local res = "";
+	for constantName, constantValues in pairs(Constants) do
+		res = res .. [[const ]] .. constantName .. " = " .. cJson:Serialize(constantValues) .. "\n"
+	end
+	return res, "application/javascript";
+end
+
+
+
+
+
 --- All supported endpoints.
 local g_Endpoints = {
+	constants = HandleEndpointConstants,
 	file = HandleEndpointGetFile,
 	worlds = HandleEndpointWorlds,
 	task = HandleEndpointTask,
