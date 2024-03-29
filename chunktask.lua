@@ -191,7 +191,7 @@ function CreateTaskPlayer(a_Task)
 			return true;
 		end
 	end);
-	return CreateTask(a_Task.world, a_Task.mode, chunkX, chunkZ, a_Task.radius, a_Task.chunkOrder)
+	return CreateTask(a_Task.world, a_Task.generateMode, chunkX, chunkZ, a_Task.radius, a_Task.chunkOrder)
 end
 
 
