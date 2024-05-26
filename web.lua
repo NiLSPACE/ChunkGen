@@ -191,7 +191,7 @@ function HandleWebRequest(a_Request)
 			resizeIframe(iframe);
 		})
 	</script>
-	<iframe id="content-iframe"  onload="resizeIframe(this)" src="/~webadmin/ChunkRegen/Chunk+Regen?endpoint=file&file=index">
+	<iframe id="content-iframe"  onload="resizeIframe(this)" src="/~webadmin/]] .. g_PluginInfo.Name .. [[/Chunk+Regen?endpoint=file&file=index">
 	]]
 end
 
