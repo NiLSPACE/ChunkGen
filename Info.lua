@@ -25,7 +25,7 @@ g_PluginInfo =
     {
         ["/reg"] =
         {
-            HelpString = "Regenerates chunks around the player",
+            HelpString = "Regenerates chunks around the player or cancel the previous task.",
             Permission = "chunkgen.reg",
             Handler = HandleRegCommand,
             ParameterCombinations =
@@ -36,7 +36,7 @@ g_PluginInfo =
                 },
                 {
                     Params = "cancel",
-                    Help = "Stops all chunk generation tasks in the current world."
+                    Help = "Stops your last chunk generation tasks."
                 },
             }
         }

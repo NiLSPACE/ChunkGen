@@ -12,7 +12,7 @@ Some advantages over ChunkWorx:
 ### General
 | Command | Permission | Description |
 | ------- | ---------- | ----------- |
-|/reg | chunkgen.reg | Regenerates chunks around the player|
+|/reg | chunkgen.reg | Regenerates chunks around the player or cancel the previous task.|
 
 
 
