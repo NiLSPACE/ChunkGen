@@ -100,7 +100,7 @@ end
 
 --- Starts a new chunk generating task around the provided coordinates.
 function HandleSubEndpointFixedTask(a_Task)
-	return CreateTaskFixed(a_Task);
+	return CreateTask(a_Task.world, a_Task.generateMode, a_Task.chunkX, a_Task.chunkZ, a_Task.radius, a_Task.chunkOrder);
 end
 
 
@@ -109,7 +109,16 @@ end
 
 --- Starts a new chunk generating task around the requested player.
 function HandleSubEndpointPlayerTask(a_Task)
-	return CreateTaskPlayer(a_Task);
+	local world = cRoot:Get():GetWorld(a_Task.world);
+	local chunkX, chunkZ
+	world:ForEachPlayer(function(a_Player)
+		if (a_Player:GetName() == a_Task.playerName) then
+			chunkX = a_Player:GetChunkX();
+			chunkZ = a_Player:GetChunkZ();
+			return true;
+		end
+	end);
+	return CreateTask(a_Task.world, a_Task.generateMode, chunkX, chunkZ, a_Task.radius, a_Task.chunkOrder)
 end
 
 

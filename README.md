@@ -6,3 +6,17 @@ Some advantages over ChunkWorx:
  - Allow any radius around a player instead of just the exact chunk or 3x3 
  - Statistics about the generator, lighting en storage queues. 
  - The to be generated chunks can spiral around a set of coordinates or a player which allows you to see the new chunks immediately instead of waiting for the updates to finally catch up to you.
+
+# Commands
+
+### General
+| Command | Permission | Description |
+| ------- | ---------- | ----------- |
+|/reg | chunkgen.reg | Regenerates chunks around the player|
+
+
+
+# Permissions
+| Permissions | Description | Commands | Recommended groups |
+| ----------- | ----------- | -------- | ------------------ |
+| chunkgen.reg |  | `/reg` |  |
