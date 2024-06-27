@@ -123,10 +123,13 @@ function CreateTask(a_World, a_Mode, a_ChunkX, a_ChunkZ, a_Radius, a_ChunkOrder,
 		);
 	elseif (a_ChunkOrder == ChunkOrder.Spiral) then
 		coordinateProvider = CoordinateProviderSpiral(a_ChunkX, a_ChunkZ, a_Radius)
+	elseif (a_ChunkOrder == ChunkOrder.Hilbert) then
+		coordinateProvider = CreateIteratorHilbert(a_ChunkX, a_ChunkZ, a_Radius)
 	else
 		return false, "Unknown chunk order"
 	end
 	
+	LOGINFO(("New chunk generation task.  Size: %s,  Chunk Iterator: %s,  Mode: %s"):format((a_Radius * 2 + 1) ^ 2, a_ChunkOrder, a_Mode))
 	local task = ChunkTask:new(a_World, (a_Radius * 2 + 1) ^ 2, coordinateProvider, a_Mode)
 
 	table.insert(g_Tasks[a_World], task);
