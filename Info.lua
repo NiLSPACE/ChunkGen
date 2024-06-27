@@ -6,8 +6,8 @@
 g_PluginInfo =
 {
 	Name = "ChunkGen",
-	Version = 3,
-	DisplayVersion = "1.2",
+	Version = 4,
+	DisplayVersion = "1.3",
 	Date = "2024-06-27", -- yyyy-mm-dd
 	SourceLocation = "https://github.com/NiLSPACE/ChunkGen",
 	Description = [[Inspired by {%a https://github.com/cuberite/chunkworx}ChunkWorx{%/a} this plugin allows the user to easily (re)generate chunks from the webadmin. ChunkWorx still works, but it's been 10 years since anyone has looked at the code. There are lots of magic numbers which makes maintaining the code harder. The interface also loses it's state everytime there is a reload which makes development on the world generator more frustrating. This plugin tries to solve all these issues and add some more functionality to make world generator development easier.

@@ -115,18 +115,9 @@ end
 
 --- Creates and starts a new chunk generating task using the provided parameters.
 function CreateTask(a_World, a_Mode, a_ChunkX, a_ChunkZ, a_Radius, a_ChunkOrder, a_OnCompleteCallback)
-	local coordinateProvider;
-	if (a_ChunkOrder == ChunkOrder.Lines) then
-		coordinateProvider = CoordinateProviderArea(
-			a_ChunkX - a_Radius, a_ChunkX + a_Radius,
-			a_ChunkZ - a_Radius, a_ChunkZ + a_Radius
-		);
-	elseif (a_ChunkOrder == ChunkOrder.Spiral) then
-		coordinateProvider = CoordinateProviderSpiral(a_ChunkX, a_ChunkZ, a_Radius)
-	elseif (a_ChunkOrder == ChunkOrder.Hilbert) then
-		coordinateProvider = CreateIteratorHilbert(a_ChunkX, a_ChunkZ, a_Radius)
-	else
-		return false, "Unknown chunk order"
+	local coordinateProvider, err = GetChunkOrderProvider(a_ChunkOrder, a_Radius, a_ChunkX, a_ChunkZ);
+	if (not coordinateProvider) then
+		return false, err
 	end
 	
 	LOGINFO(("New chunk generation task.  Size: %s,  Chunk Iterator: %s,  Mode: %s"):format((a_Radius * 2 + 1) ^ 2, a_ChunkOrder, a_Mode))

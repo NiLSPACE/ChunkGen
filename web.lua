@@ -151,13 +151,35 @@ end
 
 
 
+--- Calculates a list of chunk coordinates which can be used as a preview of the requested chunk order.
+function HandleEndpointChunkOrderPreview(a_Request)
+	local radius = tonumber(a_Request.Params['radius'])
+	if (not radius) then
+		return "Provided radius is not a number"
+	end
+	local iterator, err = GetChunkOrderProvider(a_Request.Params["chunkorder"], radius, radius, radius)
+	if (not iterator) then
+		return err
+	end
+	local output = {}
+	for x, z in iterator do
+		table.insert(output, {x = x, z = z})
+	end
+	return cJson:Serialize(output), "application/javascript"
+end
+
+
+
+
+
 --- All supported endpoints.
 local g_Endpoints = {
 	constants = HandleEndpointConstants,
 	file = HandleEndpointGetFile,
 	worlds = HandleEndpointWorlds,
 	task = HandleEndpointTask,
-	canceltask = HandleEndpointCancelTask
+	canceltask = HandleEndpointCancelTask,
+	chunkorderpreview = HandleEndpointChunkOrderPreview
 }
 
 
