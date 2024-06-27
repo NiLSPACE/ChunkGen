@@ -73,3 +73,8 @@ div[disabled="disabled"] {
 	display:flex;
 	justify-content: center;
 }
+
+
+#preview-canvas {
+	background-color: lightgray;
+}

@@ -185,3 +185,23 @@ end
 
 
 
+
+--- Creates the requested chunk iterator using the provided radius and chunk coordinates.
+function GetChunkOrderProvider(a_ChunkOrder, a_Radius, a_ChunkX, a_ChunkZ)
+	if (a_ChunkOrder == ChunkOrder.Lines) then
+		return CoordinateProviderArea(
+			a_ChunkX - a_Radius, a_ChunkX + a_Radius,
+			a_ChunkZ - a_Radius, a_ChunkZ + a_Radius
+		);
+	elseif (a_ChunkOrder == ChunkOrder.Spiral) then
+		return CoordinateProviderSpiral(a_ChunkX, a_ChunkZ, a_Radius)
+	elseif (a_ChunkOrder == ChunkOrder.Hilbert) then
+		return CreateIteratorHilbert(a_ChunkX, a_ChunkZ, a_Radius)
+	else
+		return false, "Unknown chunk order"
+	end
+end
+
+
+
+

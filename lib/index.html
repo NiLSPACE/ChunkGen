@@ -53,10 +53,18 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Chunk Order</td>
+					<td>Chunk Order <small ng-click="switchPreview()">({{previewChunkOrder ? 'hide' : 'preview'}})</small></td>
 					<td>
 						<select ng-model="chunkOrder" ng-options="mode as mode for mode in chunkOrderOptions">
 						</select>
+					</td>
+				</tr>
+				<tr ng-hide="!previewChunkOrder">
+					<td>
+						<canvas height="300" width="300" id="preview-canvas"></canvas>
+					</td>
+					<td>
+						Radius: <input type="number" ng-model="previewRadius">
 					</td>
 				</tr>
 			</table>
