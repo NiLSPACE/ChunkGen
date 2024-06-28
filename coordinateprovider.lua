@@ -197,6 +197,8 @@ function GetChunkOrderProvider(a_ChunkOrder, a_Radius, a_ChunkX, a_ChunkZ)
 		return CoordinateProviderSpiral(a_ChunkX, a_ChunkZ, a_Radius)
 	elseif (a_ChunkOrder == ChunkOrder.Hilbert) then
 		return CreateIteratorHilbert(a_ChunkX, a_ChunkZ, a_Radius)
+	elseif (a_ChunkOrder == ChunkOrder.Random) then
+		return CreateIteratorRandom(a_ChunkX, a_ChunkZ, a_Radius)
 	else
 		return false, "Unknown chunk order"
 	end
@@ -205,3 +207,27 @@ end
 
 
 
+function CreateIteratorRandom(a_ChunkX, a_ChunkZ, a_Radius)
+	local outp = {}
+	local baseProvider = CoordinateProviderArea(
+		a_ChunkX - a_Radius, a_ChunkX + a_Radius,
+		a_ChunkZ - a_Radius, a_ChunkZ + a_Radius
+	)
+	for x, z in baseProvider do
+		table.insert(outp, {x = x, z = z})
+	end
+	math.randomseed(a_ChunkX + a_ChunkZ ^ 2 * a_Radius ^ 3)
+	for i = 1, #outp do
+		local j = math.random(#outp)
+		outp[i], outp[j] = outp[j], outp[i]
+	end
+	local curr = 1
+	return function()
+		local coordinates = outp[curr]
+		if (not coordinates) then
+			return;
+		end
+		curr = curr + 1
+		return coordinates.x, coordinates.z
+	end
+end

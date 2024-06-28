@@ -12,7 +12,8 @@
 ChunkOrder = {
 	Lines = "Lines",
 	Spiral = "Spiral",
-	Hilbert = "Hilbert"
+	Hilbert = "Hilbert",
+	Random = "Random"
 }
 
 
